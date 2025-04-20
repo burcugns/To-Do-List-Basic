@@ -3,7 +3,11 @@
 This project is a simple and clean To Do List web application built with HTML, CSS, and JavaScript. It allows users to add, delete, and clear tasks, helping them stay organized and productive.
 
 ---
+## Screenshot
 
+<img src="to-do-list.png" alt="To Do List Screenshot" width="200" />
+
+---
 ## Features
 
 - Add tasks with a simple input field and button.
