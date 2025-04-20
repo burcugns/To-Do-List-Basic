@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To Do List</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>To Do List</h1>
+  <div>
+    <form>
+      <div>
+        <input type="text" id="todoInput" placeholder="Write your list..." />
+        <button type="submit" id="addButton">Add</button>
+      </div>
+    </form>
+    <div>
+      <button id="clearAllButton" onclick="clearTodoList()">Clear All</button>
+    </div>
+    <ul id="todoList"></ul>
+  </div>
+
+  <script>
+    const todoInput = document.getElementById("todoInput");
+    const addButton = document.getElementById("addButton");
+    const todoListDOM = document.getElementById("todoList");
+
+    let todos = [];
+
+    todoInput.addEventListener("change", function (event) {
+      textInputValue = event.target.value;
+    });
+
+    addButton.addEventListener("click", addTodo);
+
+    function addTodo(event) {
+      event.preventDefault();
+      const textInputValue = todoInput.value.trim();
+      if (textInputValue !== "") {
+        todos.unshift({ id:todos.length, title: textInputValue });
+        todoInput.value = "";
+        displayTodos();
+      }
+    }
+
+    function displayTodos() {
+      let result = "";
+      if (todos.length === 0) {
+        todoListDOM.innerHTML = "<li class='empty'>List is empty</li>";
+      } else {
+        todos.forEach((item) => {
+          result += `<li><span>${item.title}</span> <button onclick="deleteTodo(${item.id})">Delete</button></li>`;
+        });
+        todoListDOM.innerHTML = result;
+      }
+    }
+
+    function deleteTodo(id) {
+      todos = todos.filter((todo) => todo.id !== id);
+      displayTodos();
+    }
+
+    function clearTodoList() {
+      todos.splice(0, todos.length);
+      displayTodos();
+    }
+
+    displayTodos();
+  </script>
+</body>
+</html>
